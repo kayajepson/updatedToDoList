@@ -1,0 +1,9 @@
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/bin/Debug/netcoreapp2.2/ToDoList.deps.json
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/bin/Debug/netcoreapp2.2/ToDoList.dll
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/bin/Debug/netcoreapp2.2/ToDoList.pdb
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.csprojAssemblyReference.cache
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.csproj.CoreCompileInputs.cache
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.AssemblyInfoInputs.cache
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.AssemblyInfo.cs
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.dll
+/Users/duherb/Desktop/ToDoList.Solution/ToDoList/obj/Debug/netcoreapp2.2/ToDoList.pdb
