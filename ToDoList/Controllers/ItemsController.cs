@@ -21,10 +21,17 @@ namespace ToDoList.Controllers
     }
 
     [HttpPost("/items")]
-      public ActionResult Create(string description)
-      {
-        Item myItem = new Item(description);
-        return RedirectToAction("Index");
-      }
+    public ActionResult Create(string description)
+    {
+      Item myItem = new Item(description);
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost("/items/delete")]
+    public ActionResult DeleteAll()
+    {
+      Item.ClearAll();
+      return View();
+    }
   }
 }
