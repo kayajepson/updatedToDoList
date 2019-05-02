@@ -13607,11 +13607,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/duherb/Desktop/ToDoList.Solution/ToDoList.Tests/ToDoList.Tests.csproj",
+      "projectUniqueName": "/Users/duherb/Desktop/csharp-todo/ToDoList.Tests/ToDoList.Tests.csproj",
       "projectName": "ToDoList.Tests",
-      "projectPath": "/Users/duherb/Desktop/ToDoList.Solution/ToDoList.Tests/ToDoList.Tests.csproj",
+      "projectPath": "/Users/duherb/Desktop/csharp-todo/ToDoList.Tests/ToDoList.Tests.csproj",
       "packagesPath": "/Users/duherb/.nuget/packages/",
-      "outputPath": "/Users/duherb/Desktop/ToDoList.Solution/ToDoList.Tests/obj/",
+      "outputPath": "/Users/duherb/Desktop/csharp-todo/ToDoList.Tests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -13628,8 +13628,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/Users/duherb/Desktop/ToDoList.Solution/ToDoList/ToDoList.csproj": {
-              "projectPath": "/Users/duherb/Desktop/ToDoList.Solution/ToDoList/ToDoList.csproj"
+            "/Users/duherb/Desktop/csharp-todo/ToDoList/ToDoList.csproj": {
+              "projectPath": "/Users/duherb/Desktop/csharp-todo/ToDoList/ToDoList.csproj"
             }
           }
         }

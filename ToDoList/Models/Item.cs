@@ -5,7 +5,7 @@ namespace ToDoList.Models
   {
 
     private string _description;
-    private ind _id;
+    private int _id;
     private static List<Item> _instances = new List<Item> {};
 
     public Item (string description)
