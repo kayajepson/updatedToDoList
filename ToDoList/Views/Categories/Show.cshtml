@@ -1,4 +1,7 @@
-
+@using ToDoList.Models;
+@{
+  Layout = "_Layout";
+}
 @* changed Model to accept a single category instead of a dictionary *@
 <h3>Here are all the items in this category:</h3>
 
@@ -10,7 +13,7 @@
 </ol> *@
 
 <ol>
-@foreach (var item in @Model.GetItems())
+@foreach (Item item in @Model.GetItems())
 {
   <li><a href='/categories/@Model.GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
 }
