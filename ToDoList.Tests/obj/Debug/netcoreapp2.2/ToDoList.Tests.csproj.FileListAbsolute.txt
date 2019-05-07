@@ -20,3 +20,5 @@
 /Users/duherb/Desktop/csharp-todo/ToDoList.Tests/obj/Debug/netcoreapp2.2/ToDoList.Tests.csproj.CopyComplete
 /Users/duherb/Desktop/csharp-todo/ToDoList.Tests/obj/Debug/netcoreapp2.2/ToDoList.Tests.dll
 /Users/duherb/Desktop/csharp-todo/ToDoList.Tests/obj/Debug/netcoreapp2.2/ToDoList.Tests.pdb
+/Users/Guest/Desktop/To-Do-List.Solution-3.0/ToDoList.Tests/obj/Debug/netcoreapp2.2/ToDoList.Tests.dll
+/Users/Guest/Desktop/To-Do-List.Solution-3.0/ToDoList.Tests/obj/Debug/netcoreapp2.2/ToDoList.Tests.pdb
