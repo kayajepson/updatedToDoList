@@ -5,16 +5,16 @@ namespace ToDoList.Models
 {
   public class Category
   {
-    private static List<Category> _instances = new List<Category> {};
+    // private static List<Category> _instances = new List<Category> {};
     private string _name;
     private int _id;
     private List<Item> _items;
 
-    public Category(string categoryName)
+    public Category(string categoryName, int id = 0)
     {
       _name = categoryName;
-      _instances.Add(this);
-      _id = _instances.Count;
+      // _instances.Add(this);
+      _id = id;
       _items = new List<Item>{};
     }
 
@@ -54,7 +54,7 @@ namespace ToDoList.Models
       {
         int CategoryId = rdr.GetInt32(0);
         string CategoryName = rdr.GetString(1);
-        Category newCategory = new Category(CategoryName);
+        Category newCategory = new Category(CategoryName, CategoryId);
         allCategories.Add(newCategory);
       }
       conn.Close();
@@ -65,20 +65,66 @@ namespace ToDoList.Models
       return allCategories;
     }
 
-    public static Category Find(int searchId)
+    public static Category Find(int id)
     {
-      return _instances[searchId-1];
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM categories WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int CategoryId = 0;
+      string CategoryName = "";
+      while(rdr.Read())
+      {
+        CategoryId = rdr.GetInt32(0);
+        CategoryName = rdr.GetString(1);
+      }
+      Category newCategory = new Category(CategoryName, CategoryId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newCategory;
     }
 
-    public void AddItem(Item item)
-    {
-      _items.Add(item);
-    }
+    // public void AddItem(Item item)
+    // {
+    //   _items.Add(item);
+    // }
 
     public List<Item> GetItems()
     {
-      return _items;
+      List<Item> allCategoryItems = new List<Item>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM items WHERE category_id = @category_id;";
+      MySqlParameter categoryId = new MySqlParameter();
+      categoryId.ParameterName = "@category_id";
+      categoryId.Value = this._id;
+      cmd.Parameters.Add(categoryId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+         int itemId = rdr.GetInt32(0);
+         string itemDescription = rdr.GetString(1);
+         int itemCategoryId = rdr.GetInt32(2);
+         Item newItem = new Item(itemDescription, itemCategoryId, itemId);
+         allCategoryItems.Add(newItem);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allCategoryItems;
     }
+
     public override bool Equals(System.Object otherCategory)
     {
       if (!(otherCategory is Category))
@@ -89,7 +135,8 @@ namespace ToDoList.Models
       {
         Category newCategory = (Category) otherCategory;
         bool nameEquality = this.GetName().Equals(newCategory.GetName());
-        return nameEquality;
+        bool idEquality = this.GetId().Equals(newCategory.GetId());
+        return (nameEquality && idEquality);
       }
     }
 
@@ -104,6 +151,7 @@ namespace ToDoList.Models
       name.Value = this._name;
       cmd.Parameters.Add(name);
       cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId; // <-- This line is new!
       conn.Close();
       if (conn != null)
       {
