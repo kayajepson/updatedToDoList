@@ -8,14 +8,14 @@ namespace ToDoList.Models
     // private static List<Category> _instances = new List<Category> {};
     private string _name;
     private int _id;
-    private List<Item> _items;
+    // private List<Item> _items;
 
     public Category(string categoryName, int id = 0)
     {
       _name = categoryName;
       // _instances.Add(this);
       _id = id;
-      _items = new List<Item>{};
+      // _items = new List<Item>{};
     }
 
     public string GetName()
@@ -126,19 +126,19 @@ namespace ToDoList.Models
     }
 
     public override bool Equals(System.Object otherCategory)
+  {
+    if (!(otherCategory is Category))
     {
-      if (!(otherCategory is Category))
-      {
-        return false;
-      }
-      else
-      {
-        Category newCategory = (Category) otherCategory;
-        bool nameEquality = this.GetName().Equals(newCategory.GetName());
-        bool idEquality = this.GetId().Equals(newCategory.GetId());
-        return (nameEquality && idEquality);
-      }
+      return false;
     }
+    else
+    {
+      Category newCategory = (Category) otherCategory;
+      bool idEquality = this.GetId().Equals(newCategory.GetId());
+      bool nameEquality = this.GetName().Equals(newCategory.GetName());
+      return (idEquality && nameEquality);
+    }
+  }
 
     public void Save()
     {

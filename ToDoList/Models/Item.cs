@@ -154,8 +154,8 @@ namespace ToDoList.Models
       {
         conn.Dispose();
       }
-
     }
+    
     public int GetCategoryId()
     {
       return _categoryId;
