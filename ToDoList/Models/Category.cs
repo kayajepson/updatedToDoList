@@ -31,16 +31,16 @@ namespace ToDoList.Models
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
-   conn.Open();
-   var cmd = conn.CreateCommand() as MySqlCommand;
-   cmd.CommandText = @"DELETE FROM categories;";
-   cmd.ExecuteNonQuery();
-   conn.Close();
-   if (conn != null)
-   {
-     conn.Dispose();
-   }
-  }
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM categories;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
 
     public static List<Category> GetAll()
     {
@@ -78,6 +78,37 @@ namespace ToDoList.Models
     public List<Item> GetItems()
     {
       return _items;
+    }
+    public override bool Equals(System.Object otherCategory)
+    {
+      if (!(otherCategory is Category))
+      {
+        return false;
+      }
+      else
+      {
+        Category newCategory = (Category) otherCategory;
+        bool nameEquality = this.GetName().Equals(newCategory.GetName());
+        return nameEquality;
+      }
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO categories (name) VALUES (@name);";
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@name";
+      name.Value = this._name;
+      cmd.Parameters.Add(name);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
   }
