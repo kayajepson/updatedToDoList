@@ -10,8 +10,8 @@ namespace ToDoList.Controllers
     [HttpGet("/categories/{categoryId}/items/new")]
     public ActionResult New(int categoryId)
     {
-       Category category = Category.Find(categoryId);
-       return View(category);
+      Category category = Category.Find(categoryId);
+      return View(category);
     }
 
     [HttpGet("/categories/{categoryId}/items/{itemId}")]
@@ -54,5 +54,22 @@ namespace ToDoList.Controllers
       model.Add("item", item);
       return View("Show", model);
     }
+
+    [HttpPost("/categories/{categoryId}/items/{itemId}/delete-item")]
+    public ActionResult DeleteItem(int categoryId, int itemId)
+    {
+      Item item = Item.Find(itemId);
+      item.Delete();
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Category foundCategory = Category.Find(categoryId);
+      List<Item> categoryItems = foundCategory.GetItems();
+      model.Add("item", categoryItems);
+      model.Add("category", foundCategory);
+      // return View(model);
+      return RedirectToAction("Show", "Categories");
+      //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
+    }
+
+
   }
 }

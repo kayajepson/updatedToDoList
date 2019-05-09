@@ -155,13 +155,13 @@ namespace ToDoList.Models
         conn.Dispose();
       }
     }
-    
+
     public int GetCategoryId()
     {
       return _categoryId;
     }
 
-    public void DeleteItem(int id)
+    public void Delete()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
