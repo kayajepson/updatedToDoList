@@ -159,7 +159,7 @@ namespace ToDoList.Models
       }
     }
 
-    public void DeleteCat(int id)
+    public void DeleteCat()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();

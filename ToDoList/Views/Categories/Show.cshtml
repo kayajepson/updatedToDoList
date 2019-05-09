@@ -19,6 +19,12 @@
 }
 </ol>
 
+@* friday project delete *@
+<form action="/categories/@Model.GetId()/delete-category" method="post">
+    <button type="submit" name="button">Delete this category</button>
+</form>
+
+
 <p><a href='/categories/@Model.GetId()/items/new'>Add a new item</a></p>
 <p><a href='/categories'>Return to category list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
