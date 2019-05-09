@@ -65,7 +65,7 @@ namespace ToDoList.Controllers
     public ActionResult DeleteCategory(int categoryId)
     {
       Category selectedCategory = Category.Find(categoryId);
-      selectedCategory.DeleteCat();
+      selectedCategory.DeleteCat(categoryId);
       Dictionary<string, object> model = new Dictionary<string, object>();
       List<Item> categoryItems = selectedCategory.GetItems();
       model.Add("category", selectedCategory);

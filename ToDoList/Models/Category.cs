@@ -159,17 +159,29 @@ namespace ToDoList.Models
       }
     }
 
-    public void DeleteCat()
+    public void DeleteCat(int categoryId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
+
+      Category selectedCategory = Category.Find(categoryId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Item> categoryItems = selectedCategory.GetItems();
+      model.Add("category", selectedCategory);
+
+      foreach (Item item in categoryItems)
+      {
+        item.Delete();
+      }
+
       cmd.CommandText = @"DELETE FROM categories WHERE id = @thisId;";
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
       thisId.Value = _id;
       cmd.Parameters.Add(thisId);
       cmd.ExecuteNonQuery();
+
       conn.Close();
       if (conn != null)
       {
