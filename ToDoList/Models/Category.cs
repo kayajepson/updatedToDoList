@@ -144,7 +144,8 @@ namespace ToDoList.Models
       {
         int itemId = rdr.GetInt32(0);
         string itemDescription = rdr.GetString(1);
-        Item newItem = new Item(itemDescription, itemId);
+        bool itemCompleted = rdr.GetBoolean(2);
+        Item newItem = new Item(itemDescription, itemCompleted, itemId);
         items.Add(newItem);
       }
       conn.Close();

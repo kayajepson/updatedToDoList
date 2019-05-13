@@ -7,11 +7,13 @@ namespace ToDoList.Models
   {
     private string _description;
     private int _id;
+    private bool _completed;
     // We no longer declare _categoryId here
 
-    public Item (string description, int id = 0)
+    public Item (string description, bool completed, int id = 0)
     {
       _description = description;
+      _completed = completed;
       // categoryId is removed from the constructor and its parameters
       _id = id;
     }
@@ -31,6 +33,23 @@ namespace ToDoList.Models
       return _id;
     }
 
+    public void Completed()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE FROM items WHERE id = @ItemId SET completed = '1';";
+      MySqlParameter itemIdParameter = new MySqlParameter();
+      itemIdParameter.ParameterName = "@ItemId";
+      itemIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(itemIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     // We've removed the GetCategoryId() method entirely.
 
     public static List<Item> GetAll()
@@ -45,9 +64,10 @@ namespace ToDoList.Models
       {
         int itemId = rdr.GetInt32(0);
         string itemDescription = rdr.GetString(1);
+        bool itemCompleted = rdr.GetBoolean(2);
         // We no longer need to read categoryIds from our items table here.
         // Constructor below no longer includes a itemCategoryId parameter:
-        Item newItem = new Item(itemDescription, itemId);
+        Item newItem = new Item(itemDescription, itemCompleted, itemId);
         allItems.Add(newItem);
       }
       conn.Close();
@@ -85,15 +105,17 @@ namespace ToDoList.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int itemId = 0;
       string itemName = "";
+      bool itemCompleted = false;
       // We remove the line setting a itemCategoryId value here.
       while(rdr.Read())
       {
         itemId = rdr.GetInt32(0);
         itemName = rdr.GetString(1);
+        itemCompleted = rdr.GetBoolean(2);
         // We no longer read the itemCategoryId here, either.
       }
       // Constructor below no longer includes a itemCategoryId parameter:
-      Item newItem = new Item(itemName, itemId);
+      Item newItem = new Item(itemName, itemCompleted, itemId);
       conn.Close();
       if (conn != null)
       {

@@ -32,6 +32,13 @@ namespace ToDoList.Controllers
       return View();
     }
 
+    [HttpPost("/items/completed")]
+    public ActionResult Completed()
+    {
+      Item.Completed();
+      return View("Show");
+    }
+
     [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]
     public ActionResult Edit(int categoryId, int itemId)
     {

@@ -8,6 +8,9 @@
 <h2>@Model["item"].GetDescription()</h2>
 <h3>Category: @Model["category"].GetName()</h3>
 
+<form action="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/completed" method="post">
+  <button type="submit" name="button">Mark as complete</button>
+</form>
 
 <form action="/categories/@Model["category"].GetId()/items/@Model["item"].GetId()/delete-item" method="post">
   <button type="submit" name="button">Delete this item</button>
