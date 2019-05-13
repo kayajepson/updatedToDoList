@@ -61,28 +61,28 @@ namespace ToDoList.Controllers
       return View("Show", foundCategory);
     }
 
-    [HttpPost("/categories/{categoryId}/delete-category")]
-    public ActionResult DeleteCategory(int categoryId)
-    {
-      Category selectedCategory = Category.Find(categoryId);
-      selectedCategory.DeleteCat(categoryId);
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      List<Item> categoryItems = selectedCategory.GetItems();
-      model.Add("category", selectedCategory);
-      return RedirectToAction("Index", "Categories");
+    // [HttpPost("/categories/{categoryId}/delete-category")]
+    // public ActionResult DeleteCategory(int categoryId)
+    // {
+    //   Category selectedCategory = Category.Find(categoryId);
+    //   selectedCategory.DeleteCat(categoryId);
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   List<Item> categoryItems = selectedCategory.GetItems();
+    //   model.Add("category", selectedCategory);
+    //   return RedirectToAction("Index", "Categories");
 
-      //
-      // Item item = Item.Find(itemId);
-      // item.Delete();
-      // Dictionary<string, object> model = new Dictionary<string, object>();
-      // Category foundCategory = Category.Find(categoryId);
-      // List<Item> categoryItems = foundCategory.GetItems();
-      // model.Add("item", categoryItems);
-      // model.Add("category", foundCategory);
-      // // return View(model);
-      // return RedirectToAction("Show", "Categories");
-      // //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
-    }
+    //
+    // Item item = Item.Find(itemId);
+    // item.Delete();
+    // Dictionary<string, object> model = new Dictionary<string, object>();
+    // Category foundCategory = Category.Find(categoryId);
+    // List<Item> categoryItems = foundCategory.GetItems();
+    // model.Add("item", categoryItems);
+    // model.Add("category", foundCategory);
+    // // return View(model);
+    // return RedirectToAction("Show", "Categories");
+    // //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
+    // }
 
   }
 }

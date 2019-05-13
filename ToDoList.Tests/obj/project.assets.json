@@ -13629,11 +13629,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Guest/Desktop/toDoListWithBrooke/ToDoList.Tests/ToDoList.Tests.csproj",
+      "projectUniqueName": "/Users/Guest/Desktop/toDoListFullyUpToDate/ToDoList.Tests/ToDoList.Tests.csproj",
       "projectName": "ToDoList.Tests",
-      "projectPath": "/Users/Guest/Desktop/toDoListWithBrooke/ToDoList.Tests/ToDoList.Tests.csproj",
+      "projectPath": "/Users/Guest/Desktop/toDoListFullyUpToDate/ToDoList.Tests/ToDoList.Tests.csproj",
       "packagesPath": "/Users/Guest/.nuget/packages/",
-      "outputPath": "/Users/Guest/Desktop/toDoListWithBrooke/ToDoList.Tests/obj/",
+      "outputPath": "/Users/Guest/Desktop/toDoListFullyUpToDate/ToDoList.Tests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -13650,8 +13650,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/Users/Guest/Desktop/toDoListWithBrooke/ToDoList/ToDoList.csproj": {
-              "projectPath": "/Users/Guest/Desktop/toDoListWithBrooke/ToDoList/ToDoList.csproj"
+            "/Users/Guest/Desktop/toDoListFullyUpToDate/ToDoList/ToDoList.csproj": {
+              "projectPath": "/Users/Guest/Desktop/toDoListFullyUpToDate/ToDoList/ToDoList.csproj"
             }
           }
         }

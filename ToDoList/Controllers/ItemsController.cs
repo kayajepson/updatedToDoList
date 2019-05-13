@@ -55,20 +55,20 @@ namespace ToDoList.Controllers
       return View("Show", model);
     }
 
-    [HttpPost("/categories/{categoryId}/items/{itemId}/delete-item")]
-    public ActionResult DeleteItem(int categoryId, int itemId)
-    {
-      Item item = Item.Find(itemId);
-      item.Delete();
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Category foundCategory = Category.Find(categoryId);
-      List<Item> categoryItems = foundCategory.GetItems();
-      model.Add("item", categoryItems);
-      model.Add("category", foundCategory);
-      // return View(model);
-      return RedirectToAction("Show", "Categories");
-      //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
-    }
+    // [HttpPost("/categories/{categoryId}/items/{itemId}/delete-item")]
+    // public ActionResult DeleteItem(int categoryId, int itemId)
+    // {
+    //   Item item = Item.Find(itemId);
+    //   item.Delete();
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   Category foundCategory = Category.Find(categoryId);
+    //   List<Item> categoryItems = foundCategory.GetItems();
+    //   model.Add("item", categoryItems);
+    //   model.Add("category", foundCategory);
+    //   // return View(model);
+    //   return RedirectToAction("Show", "Categories");
+    //   //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
+    // }
 
 
   }
