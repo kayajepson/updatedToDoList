@@ -10,10 +10,19 @@ namespace ToDoList.Controllers
   {
 
     [HttpGet("/categories")]
-    public ActionResult Index()
+       public ActionResult Index()
+       {
+         List<Category> allCategories = Category.GetAll();
+         return View(allCategories);
+       }
+
+    [HttpPost("/categories")]
+    public ActionResult Create(string categoryName)
     {
+      Category newCategory = new Category(categoryName);
+      newCategory.Save();
       List<Category> allCategories = Category.GetAll();
-      return View(allCategories);
+      return View("Index", allCategories);
     }
 
     [HttpGet("/categories/new")]
@@ -22,44 +31,28 @@ namespace ToDoList.Controllers
       return View();
     }
 
-    [HttpPost("/categories")]
-    public ActionResult Create(string categoryName)
-    {
-      Category newCategory = new Category(categoryName);
-      List<Category> allCategories = Category.GetAll();
-      newCategory.Save();
-      // return View("Index", allCategories);
-      return RedirectToAction("Index");
-    }
-    //modified Controller and Show View to accept a single category object
-    //instead of a Dictionary (we thought dictionary was redundant)
-
     [HttpGet("/categories/{id}")]
-    public ActionResult Show(int id)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Category selectedCategory = Category.Find(id);
-      List<Item> categoryItems = selectedCategory.GetItems();
-      model.Add("category", selectedCategory);
-      model.Add("items", categoryItems);
-      // return View(model);
-      return View(selectedCategory);
-    }
-    // This one creates new Items within a given Category, not new Categories:
+      public ActionResult Show(int id)
+      {
+          Dictionary<string, object> model = new Dictionary<string, object>();
+          Category selectedCategory = Category.Find(id);
+          List<Item> categoryItems = selectedCategory.GetItems();
+          List<Item> allItems = Item.GetAll();
+          model.Add("category", selectedCategory);
+          model.Add("categoryItems", categoryItems);
+          model.Add("allItems", allItems);
+          return View(model);
+      }
 
-    [HttpPost("/categories/{categoryId}/items")]
-    public ActionResult Create(int categoryId, string itemDescription, bool itemCompleted)
+      [HttpPost("/categories/{categoryId}/items/new")]
+    public ActionResult AddItem(int categoryId, int itemId)
     {
-      // Dictionary<string, object> model = new Dictionary<string, object>();
-      Category foundCategory = Category.Find(categoryId);
-      Item newItem = new Item(itemDescription, itemCompleted, categoryId);
-      newItem.Save();
-      foundCategory.GetItems();
-      // List<Item> categoryItems = foundCategory.GetItems();
-      // model.Add("items", categoryItems);
-      // model.Add("category", foundCategory);
-      return View("Show", foundCategory);
+      Category category = Category.Find(categoryId);
+      Item item = Item.Find(itemId);
+      category.AddItem(item);
+      return RedirectToAction("Show",  new { id = categoryId });
     }
+
 
     // [HttpPost("/categories/{categoryId}/delete-category")]
     // public ActionResult DeleteCategory(int categoryId)

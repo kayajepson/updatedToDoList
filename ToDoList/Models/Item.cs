@@ -10,7 +10,7 @@ namespace ToDoList.Models
     private bool _completed;
     // We no longer declare _categoryId here
 
-    public Item (string description, bool completed, int id = 0)
+    public Item (string description, bool completed = false, int id = 0)
     {
       _description = description;
       _completed = completed;
@@ -33,7 +33,7 @@ namespace ToDoList.Models
       return _id;
     }
 
-    public void Completed()
+    public static void Completed(int itemId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -41,7 +41,7 @@ namespace ToDoList.Models
       cmd.CommandText = @"UPDATE FROM items WHERE id = @ItemId SET completed = '1';";
       MySqlParameter itemIdParameter = new MySqlParameter();
       itemIdParameter.ParameterName = "@ItemId";
-      itemIdParameter.Value = this.GetId();
+      itemIdParameter.Value = itemId;
       cmd.Parameters.Add(itemIdParameter);
       cmd.ExecuteNonQuery();
       if (conn != null)
@@ -215,49 +215,6 @@ namespace ToDoList.Models
       }
       return categories;
     }
-
-
-    // public List<Category> GetCategories()
-    // {
-    //   cmd.CommandText = @"SELECT category_id FROM categories_items WHERE item_id = @itemId;";
-    //   MySqlParameter itemIdParameter = new MySqlParameter();
-    //   itemIdParameter.ParameterName = "@itemId";
-    //   itemIdParameter.Value = _id;
-    //   cmd.Parameters.Add(itemIdParameter);
-    //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   List<int> categoryIds = new List<int> {};
-    //   while(rdr.Read())
-    //   {
-    //     int categoryId = rdr.GetInt32(0);
-    //     categoryIds.Add(categoryId);
-    //   }
-    //   rdr.Dispose();
-    //   List<Category> categories = new List<Category> {};
-    //   foreach (int categoryId in categoryIds)
-    //   {
-    //     var categoryQuery = conn.CreateCommand() as MySqlCommand;
-    //     categoryQuery.CommandText = @"SELECT * FROM categories WHERE id = @CategoryId;";
-    //     MySqlParameter categoryIdParameter = new MySqlParameter();
-    //     categoryIdParameter.ParameterName = "@CategoryId";
-    //     categoryIdParameter.Value = categoryId;
-    //     categoryQuery.Parameters.Add(categoryIdParameter);
-    //     var categoryQueryRdr = categoryQuery.ExecuteReader() as MySqlDataReader;
-    //     while(categoryQueryRdr.Read())
-    //     {
-    //       int thisCategoryId = categoryQueryRdr.GetInt32(0);
-    //       string categoryName = categoryQueryRdr.GetString(1);
-    //       Category foundCategory = new Category(categoryName, thisCategoryId);
-    //       categories.Add(foundCategory);
-    //     }
-    //     categoryQueryRdr.Dispose();
-    //   }
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return categories;
-    // }
 
     public void AddCategory(Category newCategory)
     {
