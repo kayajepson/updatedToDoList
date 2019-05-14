@@ -74,15 +74,24 @@ namespace ToDoList.Controllers
       return RedirectToAction("Show", "Items");
     }
 
-    [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]
-    public ActionResult Edit(int categoryId, int itemId)
+    [HttpGet("/items/{itemId}/edit")]
+    public ActionResult Edit(int itemId)
     {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Category category = Category.Find(categoryId);
-      model.Add("category", category);
-      Item item = Item.Find(itemId);
-      model.Add("item", item);
+      // Dictionary<string, object> model = new Dictionary<string, object>();
+      // Category category = Category.Find(categoryId);
+      // model.Add("category", category);
+      Item model = Item.Find(itemId);
+      // model.Add("item", item);
       return View(model);
+    }
+
+    [HttpPost("/items/{itemId}/edit")]
+    public ActionResult Edit(int itemId, string newDescription)
+    {
+      Item model = Item.Find(itemId);
+      model.Edit(newDescription);
+      // model.Add("item", item);
+      return RedirectToAction("Index");
     }
 
     [HttpPost("/categories/{categoryId}/items/{itemId}")]
@@ -97,20 +106,20 @@ namespace ToDoList.Controllers
       return View("Show", model);
     }
 
-    // [HttpPost("/categories/{categoryId}/items/{itemId}/delete-item")]
-    // public ActionResult DeleteItem(int categoryId, int itemId)
-    // {
-    //   Item item = Item.Find(itemId);
-    //   item.Delete();
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category foundCategory = Category.Find(categoryId);
-    //   List<Item> categoryItems = foundCategory.GetItems();
-    //   model.Add("item", categoryItems);
-    //   model.Add("category", foundCategory);
-    //   // return View(model);
-    //   return RedirectToAction("Show", "Categories");
-    //   //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
-    // }
+    [HttpPost("/items/{itemId}/delete-item")]
+    public ActionResult DeleteItem(int categoryId, int itemId)
+    {
+      Item item = Item.Find(itemId);
+      item.Delete();
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Category foundCategory = Category.Find(categoryId);
+      List<Item> categoryItems = foundCategory.GetItems();
+      model.Add("item", categoryItems);
+      model.Add("category", foundCategory);
+      // return View(model);
+      return RedirectToAction("Show", "Categories");
+      //return RedirectToAction("actionName", "controllerName"); goes to a cshtml page in a different controller.
+    }
 
 
   }

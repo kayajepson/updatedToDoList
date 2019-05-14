@@ -16,6 +16,16 @@
   <input type="hidden" name="itemId" value="@Model["selectedItem"].GetId()">
   <button type='submit'>Mark Item as Complete</button>
 </form>
+
+  <a href='/items/@Model["selectedItem"].GetId()/edit'><button type='submit'>Edit Item</button></a>
+
+
+<form action='/items/@Model["selectedItem"].GetId()/delete-item' method='post'>
+  <input type="hidden" name="itemId" value="@Model["selectedItem"].GetId()">
+  <button type='submit'>Delete Item</button>
+</form>
+
+
 <hr />
 
 @if (@Model["itemCategories"].Count != 0)
