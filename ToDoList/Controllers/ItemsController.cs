@@ -66,12 +66,12 @@ namespace ToDoList.Controllers
       return View();
     }
 
-    [HttpPost("/items/completed")]
+    [HttpPost("/items/{id}/completed")]
     public ActionResult Completed(int itemId)
     {
 
       Item.Completed(itemId);
-      return View("Show");
+      return RedirectToAction("Show", "Items");
     }
 
     [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]

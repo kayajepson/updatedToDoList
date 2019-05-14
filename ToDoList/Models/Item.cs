@@ -33,12 +33,17 @@ namespace ToDoList.Models
       return _id;
     }
 
+    public bool IsCompleted()
+    {
+      return _completed;
+    }
+
     public static void Completed(int itemId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE FROM items WHERE id = @ItemId SET completed = '1';";
+      cmd.CommandText = @"UPDATE items SET completed = true WHERE id = @ItemId;";
       MySqlParameter itemIdParameter = new MySqlParameter();
       itemIdParameter.ParameterName = "@ItemId";
       itemIdParameter.Value = itemId;
